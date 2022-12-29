@@ -16,13 +16,13 @@ public class MovieController {
     @PostMapping("/movies/add-movie")
     public ResponseEntity<String> addMovie(@RequestBody() Movie m){
     String res=ms.addMovieService(m);
-    return new ResponseEntity<>(res, HttpStatus.OK);
+    return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/movies/add-director")
     public ResponseEntity<String> addDirector(@RequestBody() Director d){
         String res=ms.addDirectorService(d);
-        return new ResponseEntity<>(res,HttpStatus.OK);
+        return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
         }
 
      @GetMapping("/movies/get-movie-by-name/{name}")
@@ -32,7 +32,7 @@ public class MovieController {
             return new ResponseEntity<>(res,HttpStatus.FOUND);
         }
         else
-            return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res,HttpStatus.NOT_FOUND);
      }
      @GetMapping("/movies/get-director-by-name/{name}")
     public ResponseEntity<Director> getDirectorByName(@PathVariable("name")String name){
@@ -40,24 +40,29 @@ public class MovieController {
         if(d!=null)
             return new ResponseEntity<>(d,HttpStatus.FOUND);
         else
-            return new ResponseEntity<>(d,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(d,HttpStatus.NOT_FOUND);
      }
 
      @GetMapping("/movies/get-all-movies")
     public ResponseEntity<List<String>> findAllMovies(){
-        return new ResponseEntity<>(ms.findAllMoviesService(),HttpStatus.OK);
+        List<String> res=ms.findAllMoviesService();
+        if(res==null){
+            return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
+        }
+        else
+            return new ResponseEntity<>(res,HttpStatus.OK);
      }
 
      @PutMapping("/movies/add-movie-director-pair")
     public ResponseEntity<String> addMovieDirectorPair(@RequestParam("directorName") String directorName,@RequestParam("movieName")String movieName){
-        return new ResponseEntity<>(ms.addMovieDirectorPairService(directorName,movieName),HttpStatus.OK);
+        return new ResponseEntity<>(ms.addMovieDirectorPairService(directorName,movieName),HttpStatus.ACCEPTED);
      }
 
      @GetMapping("/movies/get-movies-by-director-name/{name}")
     public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable("name")String name){
         List<String> res=ms.getMoviesByDirectornameService(name);
         if(res!=null)
-            return new ResponseEntity<>(ms.getMoviesByDirectornameService(name),HttpStatus.OK);
+            return new ResponseEntity<>(res,HttpStatus.OK);
         else
             return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
      }
