@@ -60,8 +60,12 @@ public class MovieController {
 
      @DeleteMapping("/movies/delete-all-directors")
     public ResponseEntity<String > deleteAllDirectors(){
-        return new ResponseEntity<>(ms.deleteAllDirectorsService(),HttpStatus.OK);
+        return new ResponseEntity<>(ms.deleteAllDirectorsService(),HttpStatus.GONE);
      }
 
+     @DeleteMapping("/movies/delete-director-by-name")
+    public ResponseEntity<String> deleteDirectorbyName(@RequestParam("name")String name){
+        return new ResponseEntity<>(ms.deleteDirectorByNameService(name));
+     }
 
 }

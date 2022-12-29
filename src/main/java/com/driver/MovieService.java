@@ -40,5 +40,8 @@ public class MovieService {
     String deleteAllDirectorsService(){
         return mr.deleteAllDirectorsFromDb();
     }
+    String deleteDirectorByNameService(String name){
+        mr.deleteDirectorByNameFromDb(name);
+    }
 
 }

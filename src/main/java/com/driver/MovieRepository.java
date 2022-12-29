@@ -55,7 +55,27 @@ public class MovieRepository {
     }
 
     String deleteAllDirectorsFromDb(){
+        for(String directorName:directorDb){
+            List<String> movies=movieDirectorpair.get(directorName);
+            for(String movieName:movieDb){
+                movieDb.remove(movieName);
+            }
+        }
         movieDirectorpair.clear();
+        directorDb.clear();
+        return "success";
+    }
+    String deleteDirectorByNameFromDb(String name){
+        if(directorDb.containsKey(name)){
+            if(movieDirectorpair.containsKey(name)){
+                List<String> res=movieDirectorpair.get(name);
+                for(String s:res){
+                    movieDb.remove(s);
+                }
+                movieDirectorpair.remove(name);
+            }
+            directorDb.remove(name);
+        }
         return "success";
     }
 
