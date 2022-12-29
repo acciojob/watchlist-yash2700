@@ -58,4 +58,10 @@ public class MovieController {
         return new ResponseEntity<>(ms.getMoviesByDirectornameService(name),HttpStatus.OK);
      }
 
+     @DeleteMapping("/movies/delete-all-directors")
+    public ResponseEntity<String > deleteAllDirectors(){
+        return new ResponseEntity<>(ms.deleteAllDirectorsService(),HttpStatus.OK);
+     }
+
+
 }

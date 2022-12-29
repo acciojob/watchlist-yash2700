@@ -14,13 +14,13 @@ public class MovieRepository {
     String addMoveToDb(Movie m){
         String name=m.getName();
         movieDb.put(name,m);
-        return "Successfully added";
+        return "success";
     }
 
     String addDirectorToDb(Director d){
         String name=d.getName();
         directorDb.put(name,d);
-        return "successfully added the director";
+        return "success";
     }
     Movie getMovieByNameFromDb(String name){
         return movieDb.get(name);
@@ -46,12 +46,17 @@ public class MovieRepository {
         res.add(movieName);
         movieDirectorpair.put(directorName,res);
     }
-    return "Successfully added";
+    return "success";
 
     }
 
     List<String> getMoviesByDirectorNameFromDb(String name){
         return movieDirectorpair.get(name);
+    }
+
+    String deleteAllDirectorsFromDb(){
+        movieDirectorpair.clear();
+        return "success";
     }
 
 }
