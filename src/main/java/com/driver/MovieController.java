@@ -55,7 +55,11 @@ public class MovieController {
 
      @GetMapping("/movies/get-movies-by-director-name/{name}")
     public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable("name")String name){
-        return new ResponseEntity<>(ms.getMoviesByDirectornameService(name),HttpStatus.OK);
+        List<String> res=ms.getMoviesByDirectornameService(name);
+        if(res!=null)
+            return new ResponseEntity<>(ms.getMoviesByDirectornameService(name),HttpStatus.OK);
+        else
+            return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
      }
 
      @DeleteMapping("/movies/delete-all-directors")

@@ -23,11 +23,16 @@ public class MovieRepository {
         return "success";
     }
     Movie getMovieByNameFromDb(String name){
-        return movieDb.get(name);
+        if(movieDb.containsKey(name))
+            return movieDb.get(name);
+        else
+            return null;
     }
 
     Director getDirectorByNameFromDb(String name){
-        return directorDb.get(name);
+        if(directorDb.containsKey(name))
+            return directorDb.get(name);
+        else return null;
     }
     List<String> findAllMoviesFromDb(){
         List<String> res=new ArrayList<String>();
@@ -51,7 +56,7 @@ public class MovieRepository {
     }
 
     List<String> getMoviesByDirectorNameFromDb(String name){
-        return movieDirectorpair.get(name);
+        return movieDirectorpair.getOrDefault(name,null);
     }
 
     String deleteAllDirectorsFromDb(){
