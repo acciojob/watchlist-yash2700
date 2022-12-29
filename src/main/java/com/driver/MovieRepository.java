@@ -60,19 +60,20 @@ public class MovieRepository {
     }
 
     String deleteAllDirectorsFromDb(){
-        for(String directorName:directorDb.keySet()) {
-            if (movieDirectorpair.containsKey(directorName)) {
-                List<String> movies = movieDirectorpair.get(directorName);
-                for (String movieName : movies) {
-                    movieDb.remove(movieName);
-                }
-                movieDirectorpair.remove(directorName);
-            }
-            directorDb.remove(directorName);
-        }
+        for(String director : directorDb.keySet()){
+            if(movieDirectorpair.containsKey(director)){
+                List<String> list = movieDirectorpair.get(director);
 
+                for(String m : list){
+                    movieDb.remove(m);
+                }
+                movieDirectorpair.remove(director);
+            }
+            directorDb.remove(director);
+        }
         return "success";
     }
+
     String deleteDirectorByNameFromDb(String name){
         if(directorDb.containsKey(name)){
             if(movieDirectorpair.containsKey(name)){
