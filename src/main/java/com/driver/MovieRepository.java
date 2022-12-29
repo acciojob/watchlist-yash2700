@@ -63,7 +63,7 @@ public class MovieRepository {
         for(String directorName:directorDb.keySet()) {
             if (movieDirectorpair.containsKey(directorName)) {
                 List<String> movies = movieDirectorpair.get(directorName);
-                for (String movieName : movieDb.keySet()) {
+                for (String movieName : movies) {
                     movieDb.remove(movieName);
                 }
                 movieDirectorpair.remove(directorName);
