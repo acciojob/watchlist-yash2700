@@ -57,7 +57,7 @@ public class MovieRepository {
     String deleteAllDirectorsFromDb(){
         for(String directorName:directorDb.keySet()){
             List<String> movies=movieDirectorpair.get(directorName);
-            for(String movieName:movieDb){
+            for(String movieName:movieDb.keySet()){
                 movieDb.remove(movieName);
             }
         }
