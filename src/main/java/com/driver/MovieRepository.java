@@ -13,52 +13,52 @@ public class MovieRepository {
 
     HashMap<String, Director> directorDb = new HashMap<>();
 
-    HashMap<String, List<String>> movieDirectorDb = new HashMap<>();
+    HashMap<String, List<String>> movieDirectorPairDb = new HashMap<>();
 
-    public String addMovie(Movie movie){
+    public String addMovieToDb(Movie movie){
 
         movieDb.put(movie.getName(), movie);
 
         return "success";
     }
 
-    public String addDirector(Director director){
+    public String addDirectorToDb(Director director){
 
         directorDb.put(director.getName(), director);
 
         return "success";
     }
 
-    public String addMovieDirectorPair(String movie, String director){
+    public String addMovieDirectorPairToDb(String movie, String director){
 
-        if(movieDirectorDb.containsKey(director)){
-            movieDirectorDb.get(director).add(movie);
+        if(movieDirectorPairDb.containsKey(director)){
+            movieDirectorPairDb.get(director).add(movie);
         } else{
-            movieDirectorDb.put(director, new ArrayList<>());
-            movieDirectorDb.get(director).add(movie);
+            movieDirectorPairDb.put(director, new ArrayList<>());
+            movieDirectorPairDb.get(director).add(movie);
         }
         return "success";
     }
 
-    public Movie getMovieByName(String name){
+    public Movie getMovieByNameFromDb(String name){
         if(movieDb.containsKey(name)){
             return movieDb.get(name);
         }
         return null;
     }
 
-    public Director getDirectorByName(String name){
+    public Director getDirectorByNameFromDb(String name){
         if(directorDb.containsKey(name)){
             return directorDb.get(name);
         }
         return null;
     }
 
-    public List<String> getMoviesByDirectorName(String director){
-        return movieDirectorDb.getOrDefault(director, null);
+    public List<String> getMoviesByDirectorNameFromDb(String director){
+        return movieDirectorPairDb.getOrDefault(director, null);
     }
 
-    public List<String> findAllMovies(){
+    public List<String> findAllMoviesFromDb(){
         List<String> list = new ArrayList<>();
 
         for(String s : movieDb.keySet()){
@@ -67,29 +67,29 @@ public class MovieRepository {
         return list;
     }
 
-    public String deleteDirectorByName(String director){
+    public String deleteDirectorByNameFromDb(String director){
         if(directorDb.containsKey(director)){
-            if(movieDirectorDb.containsKey(director)){
-                List<String> l = movieDirectorDb.get(director);
+            if(movieDirectorPairDb.containsKey(director)){
+                List<String> l = movieDirectorPairDb.get(director);
                 for(String s : l){
                     movieDb.remove(s);
                 }
-                movieDirectorDb.remove(director);
+                movieDirectorPairDb.remove(director);
             }
             directorDb.remove(director);
         }
         return "success";
     }
 
-    public String deleteAllDirectors(){
+    public String deleteAllDirectorsFromDb(){
         for(String director : directorDb.keySet()){
-            if(movieDirectorDb.containsKey(director)){
-                List<String> list = movieDirectorDb.get(director);
+            if(movieDirectorPairDb.containsKey(director)){
+                List<String> list = movieDirectorPairDb.get(director);
 
                 for(String m : list){
                     movieDb.remove(m);
                 }
-                movieDirectorDb.remove(director);
+                movieDirectorPairDb.remove(director);
             }
             directorDb.remove(director);
         }

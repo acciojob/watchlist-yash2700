@@ -11,37 +11,37 @@ public class MovieService {
     @Autowired
     MovieRepository mr;
     String addMovieService(Movie m){
-        String res=mr.addMovie(m);
+        String res=mr.addMovieToDb(m);
         return res;
     }
 
     String addDirectorService(Director d){
-        return mr.addDirector(d);
+        return mr.addDirectorToDb(d);
     }
 
     Movie getMovieByNameService(String name){
-        return mr.getMovieByName(name);
+        return mr.getMovieByNameFromDb(name);
     }
 
     Director getDirectorByNameService(String name){
-        return mr.getDirectorByName(name);
+        return mr.getDirectorByNameFromDb(name);
     }
     List<String> findAllMoviesService(){
-        return mr.findAllMovies();
+        return mr.findAllMoviesFromDb();
     }
 
     String addMovieDirectorPairService(String directorName,String movieName){
-    return mr.addMovieDirectorPair(directorName,movieName);
+    return mr.addMovieDirectorPairToDb(directorName,movieName);
     }
     List<String> getMoviesByDirectornameService(String name){
-    return mr.getMoviesByDirectorName(name);
+    return mr.getMoviesByDirectorNameFromDb(name);
     }
 
     String deleteAllDirectorsService(){
-        return mr.deleteAllDirectors();
+        return mr.deleteAllDirectorsFromDb();
     }
     String deleteDirectorByNameService(String name){
-        return mr.deleteDirectorByName(name);
+        return mr.deleteDirectorByNameFromDb(name);
     }
 
 }
